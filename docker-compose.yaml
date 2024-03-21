@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 
 services:
   db:
@@ -19,5 +19,4 @@ services:
        - 8080:8080
    depends_on:
        - db
-   pull_policy: always
    restart: on-failure
