@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.soat1.t32.hackathon.enums.EventoPronto;
-import br.com.fiap.soat1.t32.hackathon.models.user.Ponto;
 import br.com.fiap.soat1.t32.hackathon.models.user.presenters.ListaPontosResponse;
 import br.com.fiap.soat1.t32.hackathon.services.PontoService;
 
@@ -23,7 +22,6 @@ import static org.springframework.http.MediaType.ALL_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Tag(name = "ponto", description = "API ponto")
 @RequestMapping(value = "/v1/ponto",
@@ -37,7 +35,7 @@ public class PontoController {
 
     @PostMapping(path = "/{userId}",
         consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
-        produces = {ALL_VALUE})
+        produces = {APPLICATION_JSON_VALUE})
     @ApiResponse(responseCode = "201", description = "Cadastra proximo ponto e retorna pontos do dia")
     @Operation(description = "Cadastra pontos para o usuário informado")
     public ResponseEntity<ListaPontosResponse> cadastrarPonto(@PathVariable String userId){
@@ -50,7 +48,7 @@ public class PontoController {
 
     @PostMapping(path = "/saida/{userId}",
         consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
-        produces = {ALL_VALUE})
+        produces = {APPLICATION_JSON_VALUE})
     @ApiResponse(responseCode = "201", description = "Cadastra ponto do tipo saida e retorna pontos do dia")
     @Operation(description = "Cadastra ponto do tipo saida")
     public ResponseEntity<ListaPontosResponse>  cadastrarPontoSaida(@PathVariable String userId){
@@ -63,7 +61,7 @@ public class PontoController {
 
     @GetMapping(path = "/{userId}/day",
         consumes = {APPLICATION_JSON_VALUE, ALL_VALUE},
-        produces = {ALL_VALUE})
+        produces = {APPLICATION_JSON_VALUE})
     @ApiResponse(responseCode = "200", description = "Retorna pontos do dia")
     @Operation(description = "Retorna pontos do dia")
     public ResponseEntity<ListaPontosResponse> consultarPontosDia(@PathVariable String userId){

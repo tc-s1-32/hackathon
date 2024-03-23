@@ -33,7 +33,7 @@ public class UserController {
 	@Operation(description = "Consultar Usuario")
 	@GetMapping(path = "/{userId}", 
 		consumes = { ALL_VALUE }, 
-		produces = { APPLICATION_JSON_VALUE, ALL_VALUE })
+		produces = { APPLICATION_JSON_VALUE })
 	@ApiResponse(responseCode = "200", description = "Usuario Consultado com sucesso")
     public ResponseEntity<User> consultarUsuer(@PathVariable String userId){
 
@@ -43,7 +43,7 @@ public class UserController {
 	@Operation(description = "solicitar email com pontos do usuario")
 	@PostMapping(path = "/{userId}/report/pontos", 
 		consumes = { ALL_VALUE }, 
-		produces = { APPLICATION_JSON_VALUE, ALL_VALUE })
+		produces = { APPLICATION_JSON_VALUE })
 	@ApiResponse(responseCode = "200", description = "Relatório pontos do usuario solicitado, será enviado no email.")
     public ResponseEntity<Void> solicitarRelatorioEmail(){
         return ResponseEntity.noContent().build();
