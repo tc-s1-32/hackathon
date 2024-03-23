@@ -45,7 +45,8 @@ public class UserController {
 		consumes = { ALL_VALUE }, 
 		produces = { APPLICATION_JSON_VALUE })
 	@ApiResponse(responseCode = "200", description = "Relatório pontos do usuario solicitado, será enviado no email.")
-    public ResponseEntity<Void> solicitarRelatorioEmail(){
+    public ResponseEntity<Void> solicitarRelatorioEmail(@PathVariable String userId){
+		userService.solicitarRelatorioEmail(userId);
         return ResponseEntity.noContent().build();
     }
 
