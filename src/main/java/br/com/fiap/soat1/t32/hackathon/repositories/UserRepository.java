@@ -1,10 +1,11 @@
 package br.com.fiap.soat1.t32.hackathon.repositories;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 
 import br.com.fiap.soat1.t32.hackathon.models.user.Ponto;
 import br.com.fiap.soat1.t32.hackathon.models.user.User;
@@ -27,7 +28,14 @@ public interface UserRepository extends MongoRepository<User, String> {
         return findPontosByUserIdAndData(userId, dataInicial, dataFinal);
     }
 
-    @Query("{'_id': ?0, 'pontos.data': {$gte: ?1, $lt: ?2}}")
-    List<Ponto> findPontosByUserIdAndData(String userId, LocalDateTime dataInicial, LocalDateTime dataFinal);
+    default List<Ponto> findPontosByUserIdAndData(String userId, LocalDateTime dataInicial, LocalDateTime dataFinal){
+        User user = findById(userId).orElse(null);
+        if (user != null) {
+            return user.getPontos().stream()
+                    .filter(ponto -> ponto.getData().isAfter(dataInicial) && ponto.getData().isBefore(dataFinal))
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList(); 
+    }
 
 }
